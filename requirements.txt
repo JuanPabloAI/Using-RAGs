@@ -18,6 +18,10 @@ python-dotenv
 ipykernel
 ipywidgets
 
+# Web API
+fastapi
+uvicorn[standard]
+
 
 
 

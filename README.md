@@ -63,12 +63,15 @@ USING-RAGS/
 │   ├── 01_embeddings.ipynb    # Data ingestion and Vector DB creation
 │   └── 02_rag_chatbot.ipynb   # RAG logic experimentation
 ├── src/                       # Source code
+│   ├── api.py                 # FastAPI definition
 │   ├── download_music_data.py # Script for data acquisition
 │   └── main.py                # Main application entry point
 ├── vector_db/                 # Qdrant local persistence
 │   └── songs_db/              # Database storage files
 │       ├── collection/        # Vector collection metadata
 │       └── .lock              # Database lock file
+├── .dockerignore
+├── Dockerfile                 # Container configuration
 ├── .env                       # Environment variables
 ├── .gitignore
 ├── README.md                  # Project documentation
@@ -85,3 +88,17 @@ python src/main.py
 3. Input your musical preferences when prompted (e.g., "Suggest me some relaxing songs about freedom").
 
 4. The system will retrieve the top matches from the local vector store (vector_db/songs_db) and generate a natural language response via Llama 3.2.
+
+## Docker Deployment
+
+The aplication is containerized to ensure environment consistency and ease of deployment
+
+1. Build the image
+'''bash
+docker build -t music-rag-api:v1 .
+
+2. Run the container
+docker run -d -p 8000:8000 \
+    --name music-api \
+    --add-host=host.docker.internal:host-gateway \
+    music-rag-api:v1

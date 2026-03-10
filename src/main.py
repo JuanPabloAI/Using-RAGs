@@ -18,7 +18,7 @@ print(f"Connected to Qdrant at {db_path} and loaded encoder model.")
 # Initialize OpenAI client
 http_client = httpx.Client(proxy=None)
 client = OpenAI(
-    base_url="http://127.0.0.1:1234/v1", 
+    base_url="http://host.docker.internal:1234/v1", 
     api_key="sk-no-key-required",
     http_client=http_client
 )
